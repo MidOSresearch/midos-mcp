@@ -32,7 +32,7 @@ MidOS is a curated developer knowledge base exposed as an MCP server. Not raw do
 ### 2. Or run locally
 
 ```bash
-git clone https://github.com/LeandroLarrosa/MidOS.git
+git clone https://github.com/MidOSresearch/midos-mcp.git
 cd MidOS
 pip install -e hive_commons/
 python -m modules.mcp_server.midos_mcp --http --port 8419
