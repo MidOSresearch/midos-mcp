@@ -2,7 +2,7 @@
 # https://smithery.ai/docs/build/project-config/smithery-yaml
 #
 # Transport: streamable-http (port 8419)
-# Tools: 16 (5 free, 11 premium with API key)
+# Tools: 18 (7 free, 11 premium with API key)
 
 startCommand:
   type: http

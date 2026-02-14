@@ -27,11 +27,13 @@ CONFIGURATION IN CLAUDE:
         }
     }
 
-TOOLS EXPOSED (16):
+TOOLS EXPOSED (18):
     - search_knowledge: Search the knowledge base
     - get_skill: Get a specific skill
     - list_skills: List available skills (+ stack filter)
     - get_protocol: Get a protocol document
+    - get_eureka: Get a EUREKA breakthrough document
+    - get_truth: Get a truth patch document
     - hive_status: System status
     - semantic_search: Vector search (LanceDB + Gemini) (+ stack filter)
     - research_youtube: Queue video for research
@@ -79,6 +81,8 @@ MIDOS_ROOT = L1_ROOT
 KNOWLEDGE_DIR = L1_KNOWLEDGE
 SKILLS_DIR = KNOWLEDGE_DIR / "archive" / "legacy_system" / "capabilities"
 PROTOCOLS_DIR = KNOWLEDGE_DIR / "archive" / "legacy_system" / "protocols"
+EUREKA_DIR = KNOWLEDGE_DIR / "EUREKA"
+TRUTH_DIR = KNOWLEDGE_DIR / "truth"
 SYNAPSE_DIR = L1_SYNAPSE
 _SERVER_START_TIME = time.time()
 
@@ -212,7 +216,7 @@ mcp = FastMCP(
 
 
 # ============================================================================
-# TOOLS (15 total)
+# TOOLS (18 total)
 # ============================================================================
 
 @mcp.tool
@@ -324,6 +328,48 @@ async def get_protocol(name: str) -> str:
         return f"Protocol not found: {name}"
 
     return get_file_content(protocol_path)
+
+
+@mcp.tool
+async def get_eureka(name: str) -> str:
+    """Get a specific EUREKA breakthrough document.
+
+    Args:
+        name: EUREKA name (e.g., 'EUREKA_CACHE_SEMANTICA' or 'ATOM_001')
+    """
+    eureka_path = EUREKA_DIR / f"{name}.md"
+    if not eureka_path.exists():
+        for f in EUREKA_DIR.glob("*.md"):
+            if f.stem.lower() == name.lower():
+                eureka_path = f
+                break
+
+    if not eureka_path.exists():
+        available = [f.stem for f in EUREKA_DIR.glob("*.md")][:20]
+        return f"EUREKA not found: {name}\n\nAvailable EUREKA documents: {available}"
+
+    return get_file_content(eureka_path)
+
+
+@mcp.tool
+async def get_truth(name: str) -> str:
+    """Get a specific truth patch document.
+
+    Args:
+        name: Truth patch name (e.g., 'AGENT_MITIGATIONS_CONTEXT_OVERFLOW')
+    """
+    truth_path = TRUTH_DIR / f"{name}.md"
+    if not truth_path.exists():
+        for f in TRUTH_DIR.glob("*.md"):
+            if f.stem.lower() == name.lower():
+                truth_path = f
+                break
+
+    if not truth_path.exists():
+        available = [f.stem for f in TRUTH_DIR.glob("*.md")][:20]
+        return f"Truth patch not found: {name}\n\nAvailable truth patches: {available}"
+
+    return get_file_content(truth_path)
 
 
 @mcp.tool

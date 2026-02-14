@@ -37,6 +37,8 @@ FREE_TOOLS = {
     "hive_status",
     "project_status",
     "pool_status",
+    "get_eureka",
+    "get_truth",
 }
 
 # All tools not in FREE_TOOLS require a paid key.
@@ -259,11 +261,37 @@ class ApiKeyMiddleware(Middleware):
             usage[identifier] = {"month": month, "count": count}
         _save_usage(usage)
 
+    def _is_localhost(self) -> bool:
+        """Check if the request originates from localhost."""
+        try:
+            headers = get_http_headers(include_all=True)
+        except Exception:
+            return False
+        # Check standard proxy headers first, then fall back to host
+        forwarded = headers.get("x-forwarded-for", "").split(",")[0].strip()
+        real_ip = headers.get("x-real-ip", "")
+        host = headers.get("host", "")
+        local_addrs = {"127.0.0.1", "::1", "localhost"}
+        if forwarded and forwarded in local_addrs:
+            return True
+        if real_ip and real_ip in local_addrs:
+            return True
+        # No proxy headers → check host (direct connection)
+        host_name = host.split(":")[0] if host else ""
+        if host_name in local_addrs:
+            return True
+        return False
+
     def _resolve_tier(self) -> tuple[str, str | None]:
         """Extract API key from headers and resolve tier.
 
+        Localhost connections get full 'pro' access without a key.
         Returns (tier, key_or_none).
         """
+        # Localhost bypass — full access for local development
+        if self._is_localhost():
+            return "pro", None
+
         headers = get_http_headers(include_all=True)
         auth_header = headers.get("authorization", "")
 

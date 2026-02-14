@@ -1,6 +1,6 @@
 # MidOS — Curated Knowledge API for AI Agents
 
-> **14,900+ vectors | 78 skills | 55 source-verified discoveries | 16 MCP tools**
+> **14,900+ vectors | 78 skills | 55 source-verified discoveries | 18 MCP tools**
 
 MidOS is a curated developer knowledge base exposed as an MCP server. Not raw docs — battle-tested patterns, validated discoveries, and semantic search. Plug into Claude Desktop, Cursor, Cline, or any MCP client.
 
@@ -55,9 +55,9 @@ curl -X POST http://localhost:8419/mcp \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"semantic_search","arguments":{"query":"MCP authentication patterns","top_k":5}}}'
 ```
 
-## Tools (16 total)
+## Tools (18 total)
 
-### Free Tier (5 tools, 100 queries/mo)
+### Free Tier (7 tools, 100 queries/mo)
 
 | Tool | Description |
 |------|-------------|
@@ -66,6 +66,8 @@ curl -X POST http://localhost:8419/mcp \
 | `hive_status` | System health and stats |
 | `project_status` | Knowledge pipeline status |
 | `pool_status` | Agent coordination status |
+| `get_eureka` | Get a EUREKA breakthrough document by name |
+| `get_truth` | Get a truth patch document by name |
 
 ### Premium (11 additional tools)
 
@@ -100,10 +102,10 @@ staging/ > chunks/ > skills/ > truth/ > verified/ > SOTA/
 
 | Tier | Price | Queries/mo | Tools |
 |------|-------|------------|-------|
-| Free | $0 | 100 | 5 basic |
-| Dev | $9/mo | 5,000 | All 16 |
-| Pro | $29/mo | 25,000 | All 16 + priority |
-| Team | $79/mo | 100,000 | All 16 + 5 keys |
+| Free | $0 | 100 | 7 basic |
+| Dev | $9/mo | 5,000 | All 18 |
+| Pro | $29/mo | 25,000 | All 18 + priority |
+| Team | $79/mo | 100,000 | All 18 + 5 keys |
 
 ## Skill Packs
 
@@ -119,7 +121,7 @@ Pre-packaged knowledge bundles available on [Gumroad](https://midos.gumroad.com)
 MidOS/
 ├── knowledge/          5-layer pipeline (405 chunks, 78 skills, 55 verified)
 ├── modules/
-│   ├── mcp_server/     FastMCP server (16 tools, streamable-http)
+│   ├── mcp_server/     FastMCP server (18 tools, streamable-http)
 │   └── community_mcp/  Community server (FastAPI + Judge)
 ├── hive_commons/       Shared library (LanceDB vector store, config)
 ├── tools/              74 research and ingestion tools
