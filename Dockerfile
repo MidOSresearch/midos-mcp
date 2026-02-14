@@ -7,8 +7,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy dependency definition first (cache layer)
-COPY pyproject.toml .
+# Copy dependency definition + README (pip needs it for metadata)
+COPY pyproject.toml README.md ./
 
 # Install Python dependencies
 RUN pip install --no-cache-dir .
