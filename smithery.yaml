@@ -1,0 +1,47 @@
+# MidOS — Smithery Deployment Manifest
+# https://smithery.ai/docs/build/project-config/smithery-yaml
+#
+# Transport: streamable-http (port 8419)
+# Tools: 16 (5 free, 11 premium with API key)
+
+startCommand:
+  type: http
+  configSchema:
+    type: object
+    required: []
+    properties:
+      apiKey:
+        type: string
+        title: "API Key"
+        description: "MidOS API key for premium tools (optional — 5 tools available free)"
+      port:
+        type: number
+        title: "Port"
+        default: 8419
+        description: "HTTP server port"
+      logLevel:
+        type: string
+        title: "Log Level"
+        default: "INFO"
+        enum: ["DEBUG", "INFO", "WARNING", "ERROR"]
+        description: "Server log verbosity"
+  commandFunction: |
+    (config) => {
+      const port = config.port || 8419;
+      const env = {
+        PYTHONUNBUFFERED: "1",
+        PYTHONUTF8: "1",
+        LOG_LEVEL: config.logLevel || "INFO"
+      };
+      if (config.apiKey) {
+        env.MIDOS_API_KEY = config.apiKey;
+      }
+      return {
+        command: "python",
+        args: ["-u", "-m", "modules.mcp_server.midos_mcp", "--http", String(port)],
+        env
+      };
+    }
+  exampleConfig:
+    port: 8419
+    logLevel: "INFO"
