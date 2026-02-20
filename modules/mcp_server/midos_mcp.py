@@ -423,8 +423,19 @@ async def research_youtube(url: str, priority: str = "normal") -> str:
         url: YouTube URL to research
         priority: Priority: 'high', 'normal', 'low'
     """
-    if not url or "youtu" not in url:
+    from urllib.parse import urlparse
+
+    if not url or len(url) > 2048:
         raise ToolError("Invalid YouTube URL")
+    parsed = urlparse(url)
+    if parsed.scheme not in ("http", "https"):
+        raise ToolError("Invalid URL scheme — only http/https allowed")
+    valid_hosts = {"youtube.com", "www.youtube.com", "youtu.be", "m.youtube.com"}
+    if parsed.hostname not in valid_hosts:
+        raise ToolError(
+            f"Invalid YouTube host: {parsed.hostname}. "
+            f"Must be youtube.com or youtu.be"
+        )
 
     cmd_file = SYNAPSE_DIR / "inbox" / f"CMD_youtube_{int(time.time())}.json"
     cmd_file.parent.mkdir(parents=True, exist_ok=True)

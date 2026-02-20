@@ -19,3 +19,6 @@ Thumbs.db
 htmlcov/
 .pytest_cache/
 deploy_logs/
+config/api_keys.json
+config/api_usage.json
+knowledge/memory/

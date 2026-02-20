@@ -358,11 +358,17 @@ class ApiKeyMiddleware(Middleware):
         # Expect "Bearer midos_sk_..."
         parts = auth_header.split(" ", 1)
         if len(parts) != 2 or parts[0].lower() != "bearer":
-            return "free", None
+            # Malformed Authorization header — reject, don't degrade
+            return "invalid", None
 
         token = parts[1].strip()
         if not token.startswith("midos_sk_"):
-            return "free", None
+            # Token present but wrong format — reject
+            return "invalid", token
+
+        # Bound token length to prevent DoS (valid keys are exactly 57 chars)
+        if len(token) > 128:
+            return "invalid", token[:20]
 
         keys = self._get_keys()
         key_info = keys.get(token)
