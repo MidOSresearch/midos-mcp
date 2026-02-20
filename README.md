@@ -61,33 +61,22 @@ agent_handshake(model="claude-opus-4-6", client="claude-code", languages="python
 
 ## Tools by Tier
 
-### Free (no API key, 100 queries/mo)
+### Community (no API key, 100 queries/mo)
 
 | Tool | What it does |
 |------|--------------|
 | `search_knowledge` | Search 1,200+ curated chunks across all stacks |
 | `list_skills` | Browse 104 skills by technology |
-| `get_skill` | Get full skill content with production patterns |
+| `get_skill` | Get skill content (400-char preview, full with Pro) |
 | `get_protocol` | Get protocol and pattern documentation |
 | `hive_status` | System health and live stats |
 | `project_status` | Knowledge pipeline dashboard |
 | `agent_handshake` | Personalized onboarding for your model + CLI + stack |
 | `agent_bootstrap` | Quick onboarding (deprecated, use handshake) |
 
-### Dev ($9/mo, 5,000 queries/mo)
+### Pro ($19/mo, 25,000 queries/mo)
 
-Everything free, plus:
-
-| Tool | What it does |
-|------|--------------|
-| `chunk_code` | Intelligent code chunking for ingestion |
-| `memory_stats` | Vector store analytics and health |
-| `pool_status` | Multi-agent coordination status |
-| `episodic_search` | Search agent session history |
-
-### Pro ($12/mo, 25,000 queries/mo)
-
-Everything dev, plus:
+Everything community, plus full content access:
 
 | Tool | What it does |
 |------|--------------|
@@ -95,10 +84,14 @@ Everything dev, plus:
 | `get_truth` | Empirically verified truth patches (17 items) |
 | `semantic_search` | Vector search with Gemini embeddings (3072-d) |
 | `research_youtube` | Extract knowledge from video content |
+| `chunk_code` | Intelligent code chunking for ingestion |
+| `memory_stats` | Vector store analytics and health |
+| `pool_status` | Multi-agent coordination status |
+| `episodic_search` | Search agent session history |
 
-### Team ($25/seat/mo, 100,000 queries/mo)
+### Team ($29/seat/mo, 100,000 queries/mo)
 
-Everything pro, plus multi-seat access.
+Everything pro, plus multi-seat access and team dashboards.
 
 ## Using an API Key
 

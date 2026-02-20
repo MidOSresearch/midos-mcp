@@ -1,16 +1,15 @@
 """
 MidOS API Key Authentication + Rate Limiting Middleware for FastMCP.
 
-Implements freemium tier gating:
-  - No key → free tier (8 basic tools, 100 queries/mo)
-  - Valid key → tier-based access (dev/pro/team/admin)
-  - Invalid key → 401 error on gated tools
+Implements tiered access gating (ACCESS_TIER_DOCTRINE v1.0):
+  - No key → community tier (8 basic tools, 100 queries/mo)
+  - Valid key → tier-based access (pro/team/admin)
+  - Invalid key → rejection on all tool calls
 
 Rate limits per tier:
-  - free: 100 queries/month
-  - dev:  5,000 queries/month
-  - pro:  25,000 queries/month
-  - team: 100,000 queries/month
+  - community: 100 queries/month
+  - pro:       25,000 queries/month
+  - team:      100,000 queries/month
 
 Keys stored in config/api_keys.json, usage in config/api_usage.json.
 """
@@ -31,7 +30,7 @@ from fastmcp.tools.tool import Tool, ToolResult
 # Tier definitions
 # ---------------------------------------------------------------------------
 
-FREE_TOOLS = {
+COMMUNITY_TOOLS = {
     "search_knowledge",
     "list_skills",
     "hive_status",
@@ -43,18 +42,16 @@ FREE_TOOLS = {
 }
 
 # Tier-gated tool sets — enforced in on_call_tool middleware.
-DEV_TOOLS = {
-    "chunk_code",
-    "memory_stats",
-    "pool_status",
-    "episodic_search",
-}
-
+# ACCESS_TIER_DOCTRINE v1.0: community (0) → pro (1) → team (2) → admin (99)
 PRO_TOOLS = {
     "get_eureka",
     "get_truth",
     "semantic_search",
     "research_youtube",
+    "chunk_code",
+    "memory_stats",
+    "pool_status",
+    "episodic_search",
 }
 
 ADMIN_TOOLS = {
@@ -63,10 +60,9 @@ ADMIN_TOOLS = {
 }
 
 TIER_LIMITS = {
-    "free": {"queries_per_month": 100},
-    "dev":  {"queries_per_month": 5_000},
-    "pro":  {"queries_per_month": 25_000},
-    "team": {"queries_per_month": 100_000},
+    "community": {"queries_per_month": 100},
+    "pro":       {"queries_per_month": 25_000},
+    "team":      {"queries_per_month": 100_000},
 }
 
 # ---------------------------------------------------------------------------
@@ -159,7 +155,7 @@ def _save_keys(keys: dict[str, dict[str, Any]]) -> None:
     )
 
 
-def generate_key(name: str, tier: str = "dev") -> str:
+def generate_key(name: str, tier: str = "pro") -> str:
     """Generate a new API key and save it.
 
     Returns the key string (midos_sk_...).
@@ -198,7 +194,7 @@ def list_keys() -> list[dict[str, Any]]:
         result.append({
             "key_prefix": k[:16] + "...",
             "name": v.get("name", ""),
-            "tier": v.get("tier", "free"),
+            "tier": v.get("tier", "community"),
             "active": v.get("active", True),
             "created": v.get("created", ""),
         })
@@ -212,7 +208,7 @@ def list_keys() -> list[dict[str, Any]]:
 class ApiKeyMiddleware(Middleware):
     """FastMCP middleware that gates tools by API key tier.
 
-    - Unauthenticated requests can only use FREE_TOOLS.
+    - Unauthenticated requests can only use COMMUNITY_TOOLS.
     - Authenticated requests get full access based on tier.
     - Invalid keys get a clear error on premium tool calls.
     """
@@ -243,7 +239,7 @@ class ApiKeyMiddleware(Middleware):
         """
         import time
 
-        limit = TIER_LIMITS.get(tier, TIER_LIMITS["free"])["queries_per_month"]
+        limit = TIER_LIMITS.get(tier, TIER_LIMITS["community"])["queries_per_month"]
         month = _current_month()
 
         # Reset on new month
@@ -328,10 +324,10 @@ class ApiKeyMiddleware(Middleware):
     def _resolve_tier(self) -> tuple[str, str | None]:
         """Extract API key from headers and resolve tier.
 
-        - stdio transport: treated as free tier (no headers available).
+        - stdio transport: treated as community tier (no headers available).
           Users must set MIDOS_STDIO_TIER env var or use HTTP transport.
         - Localhost HTTP: pro tier without key (local development).
-        - Remote HTTP: requires API key for anything above free.
+        - Remote HTTP: requires API key for anything above community.
 
         Returns (tier, key_or_none).
         """
@@ -345,15 +341,15 @@ class ApiKeyMiddleware(Middleware):
             # stdio transport: no HTTP headers available.
             # Allow env-var override for trusted local setups.
             import os
-            stdio_tier = os.environ.get("MIDOS_STDIO_TIER", "free")
+            stdio_tier = os.environ.get("MIDOS_STDIO_TIER", "community")
             if stdio_tier not in TIER_LIMITS:
-                stdio_tier = "free"
+                stdio_tier = "community"
             return stdio_tier, None
 
         auth_header = headers.get("authorization", "")
 
         if not auth_header:
-            return "free", None
+            return "community", None
 
         # Expect "Bearer midos_sk_..."
         parts = auth_header.split(" ", 1)
@@ -376,7 +372,7 @@ class ApiKeyMiddleware(Middleware):
         if not key_info or not key_info.get("active", False):
             return "invalid", token
 
-        return key_info.get("tier", "dev"), token
+        return key_info.get("tier", "pro"), token
 
     async def on_call_tool(
         self,
@@ -395,17 +391,16 @@ class ApiKeyMiddleware(Middleware):
             )
 
         # Determine minimum tier required for this tool
-        TIER_LEVELS = {"free": 0, "dev": 1, "pro": 2, "team": 3, "admin": 99}
+        # ACCESS_TIER_DOCTRINE v1.0: community(0) → pro(1) → team(2) → admin(99)
+        TIER_LEVELS = {"community": 0, "pro": 1, "mod": 1, "team": 2, "admin": 99}
         if tool_name in ADMIN_TOOLS:
             required_tier = "admin"
         elif tool_name in PRO_TOOLS:
             required_tier = "pro"
-        elif tool_name in DEV_TOOLS:
-            required_tier = "dev"
-        elif tool_name in FREE_TOOLS:
-            required_tier = "free"
+        elif tool_name in COMMUNITY_TOOLS:
+            required_tier = "community"
         else:
-            required_tier = "dev"  # unknown tools default to dev
+            required_tier = "pro"  # unknown tools default to pro
 
         user_level = TIER_LEVELS.get(tier, 0)
         required_level = TIER_LEVELS.get(required_tier, 0)
@@ -414,11 +409,11 @@ class ApiKeyMiddleware(Middleware):
             raise ToolError(
                 f"'{tool_name}' requires {required_tier} tier or higher. "
                 f"Current tier: {tier}. "
-                f"Free tools: {', '.join(sorted(FREE_TOOLS))}. "
+                f"Community tools: {', '.join(sorted(COMMUNITY_TOOLS))}. "
                 f"Upgrade at https://midos.dev/pricing"
             )
 
-        # Rate limit check (applies to ALL tool calls, free and premium)
+        # Rate limit check
         identifier = key if key else self._get_anonymous_id()
         allowed, count, limit = self._check_and_increment(identifier, tier)
 
@@ -450,7 +445,7 @@ class ApiKeyMiddleware(Middleware):
         all_tools = await call_next(context)
         tier, _ = self._resolve_tier()
 
-        if tier in ("dev", "pro", "team"):
+        if tier in ("pro", "team", "mod"):
             return all_tools
 
         # Free/unauthenticated: show all tools but mark premium ones
@@ -466,7 +461,7 @@ def _cli():
     """Simple CLI for API key management.
 
     Usage:
-        python -m modules.mcp_server.auth generate --name "my-app" --tier dev
+        python -m modules.mcp_server.auth generate --name "my-app" --tier pro
         python -m modules.mcp_server.auth list
         python -m modules.mcp_server.auth revoke --key midos_sk_...
     """
@@ -477,7 +472,7 @@ def _cli():
 
     gen = sub.add_parser("generate", help="Generate a new API key")
     gen.add_argument("--name", required=True, help="Key name/description")
-    gen.add_argument("--tier", default="dev", choices=list(TIER_LIMITS.keys()))
+    gen.add_argument("--tier", default="pro", choices=list(TIER_LIMITS.keys()))
 
     sub.add_parser("list", help="List all API keys")
 

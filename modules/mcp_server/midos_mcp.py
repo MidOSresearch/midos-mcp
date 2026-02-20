@@ -817,7 +817,7 @@ async def read_skill_resource(skill_name: str) -> str:
 
     content = get_file_content(skill_path)
 
-    # Tier gating for resources: free tier gets truncated preview
+    # Tier gating for resources: community tier gets truncated preview
     try:
         from fastmcp.server.dependencies import get_http_headers
         headers = get_http_headers(include_all=True)
@@ -827,7 +827,7 @@ async def read_skill_resource(skill_name: str) -> str:
         has_valid_key = False
 
     if not has_valid_key:
-        # Truncate for free tier
+        # Truncate for community tier
         preview_limit = 400
         if len(content) > preview_limit:
             truncated = content[:preview_limit].rsplit("\n", 1)[0]
