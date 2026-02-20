@@ -18,8 +18,8 @@ COPY modules/ modules/
 COPY hive_commons/ hive_commons/
 COPY .env.example .env
 
-# Data directory for LanceDB
-RUN mkdir -p /app/knowledge/memory
+# Copy knowledge content (stripped/gated by sync_public_repo.py)
+COPY knowledge/ knowledge/
 
 EXPOSE 8419
 

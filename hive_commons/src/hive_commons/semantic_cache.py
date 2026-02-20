@@ -54,7 +54,7 @@ class SemanticCache:
                 "model": model_used,
                 "task_type": task_type,
                 "timestamp": time.time(),
-                "hits": 0
+                "hits": 0,
             }
 
             tbl = self._get_table()
@@ -91,7 +91,7 @@ class SemanticCache:
                     "response": match["response"],
                     "model": match["model"],
                     "cached_at": match.get("timestamp", 0),
-                    "similarity": similarity
+                    "similarity": similarity,
                 }
             return None
         except Exception as e:
@@ -115,7 +115,9 @@ class SemanticCache:
     def set(self, prompt: str, result, query_type: str, estimated_tokens: int = 0):
         """Adapter: saves result."""
         try:
-            response_str = json.dumps(result) if isinstance(result, dict) else str(result)
+            response_str = (
+                json.dumps(result) if isinstance(result, dict) else str(result)
+            )
             self.cache(prompt, response_str, "auto", query_type)
         except Exception as e:
             log.error("adapter_set_error", error=str(e))
@@ -126,19 +128,16 @@ class SemanticCache:
             tbl = self._get_table()
             if not tbl:
                 return {"entries": 0, "total_hits": 0, "status": "empty"}
-            
+
             count = len(tbl.to_pandas())
-            return {
-                "entries": count,
-                "db_path": str(self.uri),
-                "status": "active"
-            }
+            return {"entries": count, "db_path": str(self.uri), "status": "active"}
         except Exception as e:
             return {"entries": 0, "error": str(e), "status": "error"}
 
 
 # Singleton
 _cache: Optional[SemanticCache] = None
+
 
 def get_cache() -> SemanticCache:
     """Get singleton SemanticCache instance."""
@@ -147,12 +146,15 @@ def get_cache() -> SemanticCache:
         _cache = SemanticCache()
     return _cache
 
+
 # Aliases for backward compatibility
 get_semantic_cache = get_cache
+
 
 def cache_response(prompt: str, response: str, model_used: str, task_type: str):
     """Store a response in the cache."""
     get_cache().cache(prompt, response, model_used, task_type)
+
 
 def check_cache(prompt: str, threshold: float = 0.95) -> Optional[Dict]:
     """Check if a similar prompt was cached."""

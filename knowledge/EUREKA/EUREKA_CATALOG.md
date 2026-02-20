@@ -1,0 +1,117 @@
+# EUREKA Documents — PRO+ Knowledge Library
+
+EUREKA documents are validated breakthrough insights (L4 pipeline).
+Access requires a MidOS PRO API key.
+
+Use `get_eureka(name=...)` with your API key.
+Get a key: https://midos.dev/pricing
+
+## Available EUREKA Documents
+
+- `ATOM_001` — Atom-001
+- `ATOM_002` — Atom-002
+- `ATOM_003` — Atom-003
+- `ATOM_004` — Atom-004
+- `ATOM_005` — Atom-005
+- `ATOM_006` — Atom-006
+- `ATOM_007` — Atom-007
+- `ATOM_008` — Atom-008
+- `ATOM_009` — Atom-009
+- `ATOM_010` — Atom-010
+- `ATOM_011` — Atom-011
+- `ATOM_012` — Atom-012
+- `ATOM_013` — Atom-013
+- `ATOM_014` — Atom-014
+- `ATOM_015` — Atom-015
+- `ATOM_016` — Atom-016
+- `ATOM_017` — Atom-017
+- `EUREKA_AGENTIC_RAG_ARCHITECTURES_2026` — Agentic Rag Architectures 2026
+- `EUREKA_AGENTIC_RAG_PATTERNS_2026` — Agentic Rag Patterns 2026
+- `EUREKA_AGENT_ARCHITECTURE_PATTERNS_2026` — Agent Architecture Patterns 2026
+- `EUREKA_AGENT_FRAMEWORKS_2026` — Agent Frameworks 2026
+- `EUREKA_AGGREGATES_CONSISTENCY_BOUNDARIES_2026` — Aggregates Consistency Boundaries 2026
+- `EUREKA_AI_GUARDRAILS_PATTERNS_2026` — Ai Guardrails Patterns 2026
+- `EUREKA_AI_HUMAN_GOVERNANCE_MATRIX_2026` — Ai Human Governance Matrix 2026
+- `EUREKA_ATTENTION_PINCH_SYSTEM_2026` — Attention Pinch System 2026
+- `EUREKA_BACKLOG_SCORING_FORMULA` — Backlog Scoring Formula
+- `EUREKA_BATCH_HANDLER_2026` — Batch Handler 2026
+- `EUREKA_CLAUDE_CODE_HOOKS_ADVANCED_2026` — Claude Code Hooks Advanced 2026
+- `EUREKA_COMPOSITION_ROOT_DI_PYTHON_2026` — Composition Root Di Python 2026
+- `EUREKA_CONTEXT_ENGINEERING_2026` — Context Engineering 2026
+- `EUREKA_CONTINUOUS_LEARNING_FRONTIERS_2026` — Continuous Learning Frontiers 2026
+- `EUREKA_CONVERSATION_MANAGER_2026` — Conversation Manager 2026
+- `EUREKA_CQRS_READ_WRITE_SEPARATION_2026` — Cqrs Read Write Separation 2026
+- `EUREKA_DATA_FLYWHEEL_2026` — Data Flywheel 2026
+- `EUREKA_DEBUNK_ELEVATE_METHODOLOGY_2026` — Debunk Elevate Methodology 2026
+- `EUREKA_DEVDAY_2025_KNOWLEDGE` — Devday 2025 Knowledge
+- `EUREKA_DEXTER_HORTHY_IDEAS` — Dexter Horthy Ideas
+- `EUREKA_DOMAIN_EVENTS_MESSAGE_BUS_2026` — Domain Events Message Bus 2026
+- `EUREKA_E025_RESEARCH_SUMMARY` — E025 Research Summary
+- `EUREKA_ERROR_CLASSIFIER_2026` — Error Classifier 2026
+- `EUREKA_FASTMCP_MIDDLEWARE_PATTERN_2026` — Fastmcp Middleware Pattern 2026
+- `EUREKA_FEATURE_INTEGRATION_LIFECYCLE_2026` — Feature Integration Lifecycle 2026
+- `EUREKA_FIVE_LAYER_KNOWLEDGE_PIPELINE` — Five Layer Knowledge Pipeline
+- `EUREKA_FREE_EMBEDDINGS_STRATEGY` — Free Embeddings Strategy
+- `EUREKA_GEMINI_CLI_CALIBRATION_2026` — Gemini Cli Calibration 2026
+- `EUREKA_GITHUB_ACTIONS_CICD_2026` — Github Actions Cicd 2026
+- `EUREKA_GPU_MEMORY_MANAGEMENT_LOCAL_LLM_2026` — Gpu Memory Management Local Llm 2026
+- `EUREKA_GUARDRAILS_COMPARISON_2026` — Guardrails Comparison 2026
+- `EUREKA_HEALTH_MONITOR_2026` — Health Monitor 2026
+- `EUREKA_HITL_COST_REDUCTION_2026` — Hitl Cost Reduction 2026
+- `EUREKA_HOOK_ENFORCEMENT_PATTERN` — Hook Enforcement Pattern
+- `EUREKA_HYBRID_RAG_FINETUNING_2026` — Hybrid Rag Finetuning 2026
+- `EUREKA_HYBRID_SEARCH_RRF_2026` — Hybrid Search Rrf 2026
+- `EUREKA_HYBRID_SEARCH_STRATEGIES_2026` — Hybrid Search Strategies 2026
+- `EUREKA_JSON_REPAIR_2026` — Json Repair 2026
+- `EUREKA_KNOWLEDGE_GRAPH_ONTOLOGY_2026` — Knowledge Graph Ontology 2026
+- `EUREKA_LANCEDB_ADVANCED_SEARCH_2026` — Lancedb Advanced Search 2026
+- `EUREKA_LLM_AS_JUDGE_KNOWLEDGE_VALIDATION_2026` — Llm As Judge Knowledge Validation 2026
+- `EUREKA_LLM_GUARDRAILS_PRODUCTION_2026` — Llm Guardrails Production 2026
+- `EUREKA_LLM_VALIDATION_PRODUCTION_2026` — Llm Validation Production 2026
+- `EUREKA_LOCAL_LLM_AGENT_PATTERNS_2026` — Local Llm Agent Patterns 2026
+- `EUREKA_MCP_A2A_PROTOCOLS_2026` — Mcp A2A Protocols 2026
+- `EUREKA_MCP_ARCHITECTURE_PATTERNS_2026` — Mcp Architecture Patterns 2026
+- `EUREKA_MCP_CROSS_PLATFORM_CONFIG_2026` — Mcp Cross Platform Config 2026
+- `EUREKA_MCP_FASTMCP_FOUNDATIONS_2026` — Mcp Fastmcp Foundations 2026
+- `EUREKA_MCP_INFRASTRUCTURE_BASELINE_2026` — Mcp Infrastructure Baseline 2026
+- `EUREKA_MCP_PRODUCTION_PATTERNS_2026` — Mcp Production Patterns 2026
+- `EUREKA_MCP_PROTOCOL_SPEC_2026` — Mcp Protocol Spec 2026
+- `EUREKA_MCP_SECURITY_ARXIV_2026` — Mcp Security Arxiv 2026
+- `EUREKA_MCP_SECURITY_ZEROTRUST_2026` — Mcp Security Zerotrust 2026
+- `EUREKA_MCP_STREAMING_PATTERNS_2026` — Mcp Streaming Patterns 2026
+- `EUREKA_MODEL_AUTO_SWITCHING_STABILITY_2026` — Model Auto Switching Stability 2026
+- `EUREKA_MODEL_SELECTOR_2026` — Model Selector 2026
+- `EUREKA_MULTI_AGENT_CONSENSUS_2026` — Multi Agent Consensus 2026
+- `EUREKA_MULTI_AGENT_LOGICAL_PATTERNS_2026` — Multi Agent Logical Patterns 2026
+- `EUREKA_MULTI_AGENT_PATTERNS_2026` — Multi Agent Patterns 2026
+- `EUREKA_MULTI_CLI_ORCHESTRATION_FINDINGS_2026` — Multi Cli Orchestration Findings 2026
+- `EUREKA_OPENCODE_EXPERTISE` — Opencode Expertise
+- `EUREKA_OUTPUT_VALIDATOR_2026` — Output Validator 2026
+- `EUREKA_PATH_TRAVERSAL_PREVENTION` — Path Traversal Prevention
+- `EUREKA_PER_CLI_HANDSHAKE_ARCHITECTURE_2026` — Per Cli Handshake Architecture 2026
+- `EUREKA_PROGRESSIVE_SKILL_DISCLOSURE_2026` — Progressive Skill Disclosure 2026
+- `EUREKA_PROMPT_COMPRESSION_2026` — Prompt Compression 2026
+- `EUREKA_QUOTA_FAILOVER_PATTERN_2026` — Quota Failover Pattern 2026
+- `EUREKA_RALPH_WIGGUM_TECHNIQUE` — Ralph Wiggum Technique
+- `EUREKA_REQUEST_LOGGER_2026` — Request Logger 2026
+- `EUREKA_RESEARCH_QUALITY_FRAMEWORK_2026` — Research Quality Framework 2026
+- `EUREKA_RESPONSE_CACHE_2026` — Response Cache 2026
+- `EUREKA_RESPONSE_CACHE_PATTERN` — Response Cache Pattern
+- `EUREKA_SAAS_PRICING_MODELS_2026` — Saas Pricing Models 2026
+- `EUREKA_SCIENTIFIC_EVALUATION_CRITERIA_2026` — Scientific Evaluation Criteria 2026
+- `EUREKA_SKILLSBENCH_VALIDATION_2026` — Skillsbench Validation 2026
+- `EUREKA_STREAMING_RESPONSES_2026` — Streaming Responses 2026
+- `EUREKA_SUBAGENT_TOOL_VISIBILITY_2026` — Subagent Tool Visibility 2026
+- `EUREKA_THREE_SUITE_TESTING` — Three Suite Testing
+- `EUREKA_TIER_GATING_AUDIT_2026` — Tier Gating Audit 2026
+- `EUREKA_TOOL_EXECUTOR_2026` — Tool Executor 2026
+- `EUREKA_UNIT_OF_WORK_PATTERN_2026` — Unit Of Work Pattern 2026
+- `EUREKA_VIDEO_INTELLIGENCE_PIPELINE` — Video Intelligence Pipeline
+- `EUREKA_cache-semantica` — Cache-Semantica
+- `EUREKA_health-fallback` — Health-Fallback
+- `EUREKA_local-fallback` — Local-Fallback
+- `EUREKA_weighted-routing` — Weighted-Routing
+- `REVIEW_LOG_R014` — Review Log R014
+- `SKILLS_CLI_TOKEN_OPTIMIZATION` — Skills Cli Token Optimization
+
+_Total: 105 EUREKA documents_
