@@ -8,7 +8,7 @@ MidOS is a curated developer knowledge base exposed as an MCP server. Not raw do
 
 | Feature | Raw Docs (Context7, etc.) | MidOS |
 |---------|---------------------------|-------|
-| Content | Auto-scraped documentation | Curated, human-reviewed, cross-validated |
+| Content | Raw documentation dumps | Curated, human-reviewed, cross-validated |
 | Quality | No validation | 5-layer pipeline: chunks > truth > EUREKA > SOTA |
 | Search | Keyword matching | Semantic + hybrid search (Gemini embeddings, 3072-d) |
 | Onboarding | Generic | Personalized agent handshake per model + CLI + stack |
