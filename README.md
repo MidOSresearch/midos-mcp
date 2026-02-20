@@ -150,7 +150,7 @@ midos-mcp/
 
 - **Server**: FastMCP 2.x (streamable-http transport)
 - **Vectors**: LanceDB + Gemini embeddings (22,900+ vectors, 3072-d)
-- **Auth**: 4-tier API key middleware (free/dev/pro/team) with rate limiting
+- **Auth**: 3-tier API key middleware (community/pro/team) with rate limiting
 - **Pipeline**: 5-layer quality validation with myth-busting
 - **Deploy**: Docker + Coolify (auto-deploy on push)
 - **Compatible CLIs**: Claude Code, Cursor, Cline, Windsurf, Gemini CLI, OpenCode, Codex CLI
