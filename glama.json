@@ -1,0 +1,62 @@
+{
+  "name": "midos-mcp",
+  "display_name": "MidOS — Curated Knowledge Library",
+  "description": "Production-tested developer knowledge base with 1284 chunks, 104 skills across 15+ stacks, and 48 MCP tools. EUREKA-validated patterns, semantic search with Gemini embeddings (3072-d). Not raw docs — battle-tested patterns from real projects.",
+  "version": "0.3.0",
+  "license": "MIT",
+  "author": "MidOS Research",
+  "repository": {
+    "url": "https://github.com/MidOSresearch/midos-mcp",
+    "source": "github"
+  },
+  "homepage": "https://github.com/MidOSresearch/midos-mcp",
+  "categories": ["knowledge-base", "developer-tools", "ai-development"],
+  "tags": [
+    "knowledge-base",
+    "developer-tools",
+    "skills",
+    "semantic-search",
+    "ai-development",
+    "code-patterns",
+    "react",
+    "nextjs",
+    "typescript",
+    "python",
+    "go",
+    "rust",
+    "mcp",
+    "eureka",
+    "best-practices"
+  ],
+  "transport": {
+    "stdio": {
+      "command": "python",
+      "args": ["-m", "modules.mcp_server.midos_mcp"]
+    },
+    "streamable-http": {
+      "url": "https://lsk8k0so448c8ss40gk8c04o.5.161.96.136.sslip.io/mcp-protocol/mcp"
+    }
+  },
+  "tools": [
+    {"name": "smart_search", "description": "Unified search across 1284 knowledge chunks — auto-detects keyword, semantic, or hybrid mode"},
+    {"name": "ask_knowledge", "description": "Ask questions and get AI-synthesized answers from the knowledge base"},
+    {"name": "get_skills", "description": "Browse 104 production-tested skill templates across React, Next.js, Python, Go, Rust, and more"},
+    {"name": "get_eureka", "description": "Access 104 EUREKA-validated improvements with measured ROI"},
+    {"name": "get_truth", "description": "Truth patch documents — verified fixes and corrections"},
+    {"name": "get_sota", "description": "State-of-the-art patterns promoted from EUREKA"},
+    {"name": "submit_feedback", "description": "Submit feedback, ratings, and suggestions"},
+    {"name": "agent_handshake", "description": "Personalized agent onboarding with tier-aware context"},
+    {"name": "hive_status", "description": "System status, knowledge counts, and health info"},
+    {"name": "context_health", "description": "Check context window utilization and get optimization tips"}
+  ],
+  "stats": {
+    "knowledge_chunks": 1284,
+    "skills": 104,
+    "eureka_improvements": 104,
+    "truth_patches": 17,
+    "sota_patterns": 11,
+    "total_tools": 48,
+    "vector_embeddings": 24644,
+    "embedding_model": "gemini-embedding-001 (3072-d)"
+  }
+}
