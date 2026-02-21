@@ -2,7 +2,8 @@
 # https://smithery.ai/docs/build/project-config/smithery-yaml
 #
 # Transport: streamable-http (port 8419)
-# Tools: 18 (7 free, 11 premium with API key)
+# Tools: 48 (8 free community, 40 premium with API key)
+# Knowledge: 1,284 curated chunks, 104 skill packs, 20+ tech stacks
 
 startCommand:
   type: http
@@ -13,7 +14,7 @@ startCommand:
       apiKey:
         type: string
         title: "API Key"
-        description: "MidOS API key for premium tools (optional — 5 tools available free)"
+        description: "MidOS API key for premium tools (optional — 8 tools available free)"
       port:
         type: number
         title: "Port"
