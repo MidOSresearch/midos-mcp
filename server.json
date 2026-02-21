@@ -1,0 +1,23 @@
+{
+  "$schema": "https://registry.modelcontextprotocol.io/schema/server.json",
+  "name": "io.github.MidOSresearch/midos-mcp",
+  "description": "Curated developer knowledge API — 104 skill packs, 1284 chunks, semantic search across 20+ tech stacks. Battle-tested patterns, not raw docs.",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/MidOSresearch/midos-mcp",
+    "source": "https://github.com/MidOSresearch/midos-mcp"
+  },
+  "packages": [
+    {
+      "registry_type": "pip",
+      "name": "midos-mcp",
+      "version": "1.0.0"
+    }
+  ],
+  "remotes": [
+    {
+      "transport_type": "streamable-http",
+      "url": "https://midos.dev/mcp"
+    }
+  ]
+}
