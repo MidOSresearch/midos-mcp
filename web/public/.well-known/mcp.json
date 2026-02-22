@@ -1,0 +1,154 @@
+{
+  "$schema": "https://registry.modelcontextprotocol.io/schemas/server.json",
+  "name": "io.github.midosresearch/midos-mcp",
+  "version": "1.0.0",
+  "description": "Curated knowledge library for AI agents — 1284 chunks, 104 skills, 100+ EUREKA patterns, 55 MCP tools across 15+ stacks. Community tier: 22 tools free. Dev tier: semantic search, EUREKA, truth patches.",
+  "homepage": "https://midos.dev",
+  "repository": "https://github.com/MidOSresearch/MidOS",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "MidOS Research",
+      "url": "https://github.com/MidOSresearch"
+    }
+  ],
+  "transport": {
+    "stdio": {
+      "command": "python",
+      "args": ["-m", "modules.mcp_server.midos_mcp"],
+      "env": {}
+    },
+    "streamable-http": {
+      "url": "http://localhost:8420/mcp-protocol/mcp",
+      "note": "Self-hosted only. Start with: python -m modules.mcp_server.midos_mcp --http 8420"
+    },
+    "sse": {
+      "url": "http://localhost:8420/mcp-sse/sse",
+      "note": "Self-hosted only. Legacy SSE transport."
+    }
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": true,
+    "prompts": false
+  },
+  "tiers": {
+    "community": {
+      "level": 0,
+      "auth_required": false,
+      "rate_limit": "100 queries/month",
+      "description": "Discovery, search, skills, feedback — no key needed"
+    },
+    "dev": {
+      "level": 1,
+      "auth_required": true,
+      "rate_limit": "25000 queries/month",
+      "description": "Full knowledge access, vector search, EUREKA, truth patches"
+    },
+    "ops": {
+      "level": 2,
+      "auth_required": true,
+      "rate_limit": "100000 queries/month",
+      "description": "Custom skill packs, team features"
+    },
+    "admin": {
+      "level": 99,
+      "auth_required": true,
+      "rate_limit": "unlimited",
+      "description": "Full server control — memory, planning, security, orchestration"
+    }
+  },
+  "tools": {
+    "community": [
+      {"name": "search_knowledge", "description": "Keyword search across 1284 knowledge chunks"},
+      {"name": "list_skills", "description": "Browse 104 skills across 15+ technology stacks"},
+      {"name": "get_skill", "description": "Fetch a complete skill document by name or stack"},
+      {"name": "get_protocol", "description": "Fetch protocol/standard document"},
+      {"name": "hive_status", "description": "System health dashboard"},
+      {"name": "project_status", "description": "Live dashboard with agent quick-start guide"},
+      {"name": "architecture_query", "description": "Query system architecture graph"},
+      {"name": "agent_handshake", "description": "Personalized agent onboarding (model, client, stack)"},
+      {"name": "context_health", "description": "Check context window utilization and recommendations"},
+      {"name": "get_progress", "description": "Retrieve saved session progress for continuity"},
+      {"name": "submit_feedback", "description": "Rate knowledge items, tools, or content"},
+      {"name": "list_feedback", "description": "List recent feedback entries"},
+      {"name": "get_feedback_stats", "description": "Feedback statistics and trends"},
+      {"name": "submit_qa_report", "description": "Submit quality assurance report"},
+      {"name": "list_qa_reports", "description": "List QA reports"},
+      {"name": "quality_gate", "description": "Run quality validation on content"},
+      {"name": "list_skill_packs", "description": "Browse available skill packs"},
+      {"name": "get_installed_skills", "description": "List installed skill packs"},
+      {"name": "get_profile_info", "description": "Get agent profile information"},
+      {"name": "system_health_check", "description": "Comprehensive system health check"},
+      {"name": "get_system_state", "description": "Current system state snapshot"}
+    ],
+    "dev": [
+      {"name": "get_eureka", "description": "Access EUREKA breakthrough documents with measured ROI"},
+      {"name": "get_truth", "description": "Truth patch documents — verified fixes and corrections"},
+      {"name": "semantic_search", "description": "Vector search via LanceDB + Gemini embeddings (3072-d)"},
+      {"name": "hybrid_search", "description": "Grep-first + semantic-fallback hybrid search"},
+      {"name": "episodic_search", "description": "Search past agent experiences and session memories"},
+      {"name": "chunk_code", "description": "AST-based code chunking for ingestion"},
+      {"name": "memory_stats", "description": "Memory system statistics and health"},
+      {"name": "pool_status", "description": "Multi-instance coordination pool status"},
+      {"name": "save_progress", "description": "Save session progress as reviewable markdown"}
+    ],
+    "admin": [
+      {"name": "episodic_store", "description": "Save to session memory"},
+      {"name": "pool_signal", "description": "Signal action to multi-instance coordination pool"},
+      {"name": "research_youtube", "description": "Search and summarize YouTube content"},
+      {"name": "memory_decay_report", "description": "Report on memory staleness and decay"},
+      {"name": "memory_refresh", "description": "Refresh stale memories"},
+      {"name": "memory_archive", "description": "Archive old memories"},
+      {"name": "get_file_structure", "description": "Get project file structure"},
+      {"name": "knowledge_edit", "description": "Edit knowledge chunks"},
+      {"name": "knowledge_merge", "description": "Merge two knowledge chunks (irreversible)"},
+      {"name": "create_plan", "description": "Create persistent execution plan for multi-step tasks"},
+      {"name": "update_plan_task", "description": "Update a task within an execution plan"},
+      {"name": "get_active_plans", "description": "List active execution plans"},
+      {"name": "security_scan_target", "description": "Security vulnerability scan"},
+      {"name": "generate_pentest_report", "description": "Generate penetration test report"},
+      {"name": "red_team_prompt", "description": "Red team prompt injection testing"},
+      {"name": "where_was_i", "description": "Recover last session context"},
+      {"name": "context_compress", "description": "Compress context window content"},
+      {"name": "validate_output", "description": "Validate output against quality criteria"},
+      {"name": "smart_search", "description": "Intelligent multi-strategy search"},
+      {"name": "run_auto_healer", "description": "Run automatic system healing"},
+      {"name": "run_orchestrator_cycle", "description": "Run orchestrator cycle"},
+      {"name": "run_feedback_loop", "description": "Run feedback processing loop"},
+      {"name": "install_skill_pack", "description": "Install a skill pack from marketplace"},
+      {"name": "reset_profile", "description": "Reset agent profile to defaults"}
+    ]
+  },
+  "resources": [
+    {"uri": "midos://skill/{skill_name}", "description": "Dynamic skill retrieval by name"},
+    {"uri": "midos://discovery/server.json", "description": "Server discovery metadata"}
+  ],
+  "knowledge_base": {
+    "chunks": 1284,
+    "skills": 104,
+    "eureka": 100,
+    "truth_patches": 33,
+    "vectors": 22900,
+    "embedding_model": "gemini-embedding-001",
+    "embedding_dimensions": 3072,
+    "vector_db": "LanceDB"
+  },
+  "tags": [
+    "knowledge-base",
+    "developer-tools",
+    "skills",
+    "eureka",
+    "ai-development",
+    "code-patterns",
+    "community",
+    "vector-search",
+    "mcp",
+    "claude-code"
+  ],
+  "categories": [
+    "Developer Tools",
+    "Knowledge Management",
+    "AI Development"
+  ]
+}

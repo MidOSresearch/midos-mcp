@@ -1,0 +1,177 @@
+---
+title: Try MidOS
+description: Test MidOS tools right now — no installation needed. Run these examples against the live cloud endpoint.
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+Test MidOS tools instantly using the live cloud endpoint. No install, no API key, no signup.
+
+<Aside type="tip">
+These examples use the free Community tier (9 tools, 100 queries/month). Want full access? See [Access Tiers](/tiers/).
+</Aside>
+
+## Live Endpoint
+
+MidOS is hosted on Smithery and available at:
+
+```
+https://midos-mcp--midosresearch.run.tools
+```
+
+You can call any free-tier tool via JSON-RPC. Every example below is a real request you can copy and run.
+
+---
+
+## Example 1: Search Knowledge
+
+Find knowledge chunks across 20+ technology stacks:
+
+```bash
+curl -s https://midos-mcp--midosresearch.run.tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+      "name": "search_knowledge",
+      "arguments": {
+        "query": "React Server Components patterns",
+        "max_results": 3
+      }
+    },
+    "id": 1
+  }'
+```
+
+**What you get:** Matching knowledge chunks with title, relevance score, stack, and content preview (truncated to 250 chars on free tier).
+
+---
+
+## Example 2: List Skills by Stack
+
+Browse available skills for any technology:
+
+```bash
+curl -s https://midos-mcp--midosresearch.run.tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+      "name": "list_skills",
+      "arguments": {
+        "stack": "python"
+      }
+    },
+    "id": 2
+  }'
+```
+
+**What you get:** All Python-related skills with names, descriptions, and section counts. Try other stacks: `typescript`, `go`, `rust`, `kubernetes`, `security`.
+
+---
+
+## Example 3: Agent Handshake
+
+Tell MidOS about your agent to get personalized recommendations:
+
+```bash
+curl -s https://midos-mcp--midosresearch.run.tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+      "name": "agent_handshake",
+      "arguments": {
+        "model": "claude-sonnet-4-5-20250514",
+        "context_window": 200000,
+        "client": "cursor",
+        "languages": "python,typescript",
+        "frameworks": "fastapi,nextjs",
+        "project_goal": "Building a REST API with auth"
+      }
+    },
+    "id": 3
+  }'
+```
+
+**What you get:** Personalized tool catalog ranked by relevance, context window tips, and suggested skill packs for your exact stack.
+
+---
+
+## Example 4: System Status
+
+Check the knowledge base health and metrics:
+
+```bash
+curl -s https://midos-mcp--midosresearch.run.tools \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+      "name": "hive_status",
+      "arguments": {}
+    },
+    "id": 4
+  }'
+```
+
+**What you get:** Live counts of chunks, skills, EUREKA entries, vector store status, and pipeline health.
+
+---
+
+## From Terminal to MCP Client
+
+Once you've seen the responses, connect MidOS to your AI agent for the full experience:
+
+<Steps>
+
+1. **Install locally**
+
+   ```bash
+   pip install midos-mcp
+   ```
+
+2. **Add to your MCP client** (Claude Desktop, Cursor, VS Code, etc.)
+
+   ```json
+   {
+     "mcpServers": {
+       "midos": {
+         "command": "midos-mcp",
+         "args": ["serve"]
+       }
+     }
+   }
+   ```
+
+3. **Start asking your agent**
+
+   > "Use search_knowledge to find patterns for JWT authentication"
+
+   Your agent will call MidOS tools automatically and get structured knowledge back.
+
+</Steps>
+
+See the full [Quick Start](/quickstart/) for client-specific setup instructions.
+
+## Free Tier Tools
+
+These 9 tools are available without an API key:
+
+| Tool | What it does |
+|------|-------------|
+| `search_knowledge` | Keyword search across 1,284 knowledge chunks |
+| `list_skills` | Browse 104 skills by technology stack |
+| `hive_status` | Knowledge base health and metrics |
+| `project_status` | System overview and pipeline status |
+| `agent_handshake` | Personalized onboarding and tool recommendations |
+| `where_was_i` | Resume a previous session |
+| `context_health` | Monitor context window utilization |
+| `get_progress` | Retrieve saved session progress |
+| `agent_bootstrap` | Quick-start configuration for new agents |
+
+**Want more?** The [Dev tier](/tiers/) ($19/mo) unlocks all 57 tools, full untruncated knowledge, EUREKA discoveries, semantic search, and 25,000 queries/month.

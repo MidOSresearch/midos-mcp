@@ -1,0 +1,142 @@
+/* MidOS Custom Theme */
+:root {
+	--sl-color-accent-low: #1a1a2e;
+	--sl-color-accent: #6c63ff;
+	--sl-color-accent-high: #b8b5ff;
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #eceef2;
+	--sl-color-gray-2: #c0c2c7;
+	--sl-color-gray-3: #888b96;
+	--sl-color-gray-4: #545861;
+	--sl-color-gray-5: #353841;
+	--sl-color-gray-6: #24272f;
+	--sl-color-black: #17181c;
+}
+
+:root[data-theme='dark'] {
+	--sl-color-accent-low: #1a1a3e;
+	--sl-color-accent: #7c73ff;
+	--sl-color-accent-high: #c8c5ff;
+}
+
+/* Hero section enhancements */
+.hero {
+	padding-block: 3rem;
+}
+
+/* Stats grid on landing */
+.stats-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	gap: 1.5rem;
+	margin: 2rem 0;
+}
+
+.stat-card {
+	text-align: center;
+	padding: 1.5rem 1rem;
+	border-radius: 12px;
+	background: var(--sl-color-gray-6);
+	border: 1px solid var(--sl-color-gray-5);
+}
+
+.stat-card .stat-value {
+	font-size: 2rem;
+	font-weight: 800;
+	color: var(--sl-color-accent);
+	line-height: 1;
+}
+
+.stat-card .stat-label {
+	font-size: 0.85rem;
+	color: var(--sl-color-gray-2);
+	margin-top: 0.5rem;
+}
+
+/* Feature section */
+.feature-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 1.5rem;
+	margin: 2rem 0;
+}
+
+.feature-card {
+	padding: 1.5rem;
+	border-radius: 12px;
+	background: var(--sl-color-gray-6);
+	border: 1px solid var(--sl-color-gray-5);
+	transition: border-color 0.2s;
+}
+
+.feature-card:hover {
+	border-color: var(--sl-color-accent);
+}
+
+.feature-card h3 {
+	margin-top: 0;
+	color: var(--sl-color-white);
+}
+
+/* Tier comparison table */
+.tier-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5rem 0;
+}
+
+.tier-table th,
+.tier-table td {
+	padding: 0.75rem 1rem;
+	border: 1px solid var(--sl-color-gray-5);
+	text-align: left;
+}
+
+.tier-table th {
+	background: var(--sl-color-gray-6);
+	color: var(--sl-color-accent-high);
+	font-weight: 600;
+}
+
+.tier-table tr:nth-child(even) {
+	background: var(--sl-color-gray-6);
+}
+
+/* Code blocks in tool docs */
+.tool-signature {
+	font-family: var(--sl-font-mono);
+	padding: 0.2em 0.4em;
+	border-radius: 4px;
+	background: var(--sl-color-gray-6);
+	font-size: 0.9em;
+}
+
+/* Badge styling */
+.badge {
+	display: inline-block;
+	padding: 0.2em 0.6em;
+	border-radius: 999px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.badge-free { background: #065f46; color: #6ee7b7; }
+.badge-dev { background: #1e3a5f; color: #7dd3fc; }
+.badge-pro { background: #4c1d95; color: #c4b5fd; }
+.badge-admin { background: #7f1d1d; color: #fca5a5; }
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+	.stats-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1rem;
+	}
+	.stat-card .stat-value {
+		font-size: 1.5rem;
+	}
+	.feature-grid {
+		grid-template-columns: 1fr;
+	}
+}

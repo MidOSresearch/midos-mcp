@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f1a;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1a1a3e;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Logo icon -->
+  <rect x="80" y="200" width="80" height="80" rx="16" fill="#7c73ff" opacity="0.15" stroke="#7c73ff" stroke-width="3"/>
+  <circle cx="105" cy="240" r="10" fill="#7c73ff"/>
+  <circle cx="135" cy="225" r="7" fill="#7c73ff" opacity="0.7"/>
+  <circle cx="135" cy="255" r="7" fill="#7c73ff" opacity="0.7"/>
+  <line x1="113" y1="235" x2="129" y2="226" stroke="#7c73ff" stroke-width="2" opacity="0.5"/>
+  <line x1="113" y1="245" x2="129" y2="254" stroke="#7c73ff" stroke-width="2" opacity="0.5"/>
+  <!-- Title -->
+  <text x="190" y="255" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="800" fill="white">MidOS</text>
+  <!-- Subtitle -->
+  <text x="82" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="32" fill="#b8b5ff">Curated Knowledge for AI Agents</text>
+  <!-- Stats -->
+  <text x="82" y="420" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#888b96">57 MCP Tools  |  1,284 Knowledge Chunks  |  104 Skills  |  22,900 Vectors</text>
+  <!-- MCP badge -->
+  <rect x="82" y="470" width="180" height="40" rx="20" fill="#7c73ff" opacity="0.2" stroke="#7c73ff" stroke-width="1.5"/>
+  <text x="115" y="496" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#c8c5ff">MCP Community Library</text>
+  <!-- Accent line -->
+  <rect x="0" y="620" width="1200" height="10" fill="#7c73ff"/>
+</svg>

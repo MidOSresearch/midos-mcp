@@ -1,0 +1,167 @@
+---
+title: Quick Start
+description: Install MidOS MCP server and connect it to Claude Desktop, Cursor, or any MCP-compatible client in under 2 minutes.
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+Get MidOS running with your AI agent in 3 steps.
+
+## Prerequisites
+
+- **Python 3.10+** installed
+- An MCP-compatible client: Claude Desktop, Cursor, Cline, VS Code, Windsurf, Zed, or OpenCode
+
+## Installation
+
+<Steps>
+
+1. **Install the package**
+
+   ```bash
+   pip install midos-mcp
+   ```
+
+2. **Configure your MCP client**
+
+   <Tabs>
+     <TabItem label="Claude Desktop">
+       Edit `~/AppData/Roaming/Claude/claude_desktop_config.json` (Windows) or `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS):
+
+       ```json
+       {
+         "mcpServers": {
+           "midos": {
+             "command": "midos-mcp",
+             "args": ["serve"]
+           }
+         }
+       }
+       ```
+     </TabItem>
+     <TabItem label="Claude Code">
+       Run:
+       ```bash
+       midos-mcp config --generate claude
+       ```
+       Or add to `.mcp.json`:
+       ```json
+       {
+         "mcpServers": {
+           "midos": {
+             "command": "midos-mcp",
+             "args": ["serve"],
+             "type": "stdio"
+           }
+         }
+       }
+       ```
+     </TabItem>
+     <TabItem label="Cursor">
+       Add to `.cursor/mcp.json`:
+       ```json
+       {
+         "mcpServers": {
+           "midos": {
+             "command": "midos-mcp",
+             "args": ["serve"]
+           }
+         }
+       }
+       ```
+     </TabItem>
+     <TabItem label="VS Code / Cline">
+       Add to your MCP settings:
+       ```json
+       {
+         "mcpServers": {
+           "midos": {
+             "command": "midos-mcp",
+             "args": ["serve"]
+           }
+         }
+       }
+       ```
+     </TabItem>
+     <TabItem label="HTTP Mode">
+       For HTTP/SSE transport (multi-client):
+       ```bash
+       midos-mcp serve --http
+       ```
+       Server starts at `http://127.0.0.1:8419/mcp`. Then configure your client to connect via HTTP.
+     </TabItem>
+   </Tabs>
+
+3. **Verify the connection**
+
+   ```bash
+   midos-mcp health
+   ```
+
+   You should see:
+   ```
+   MidOS Health Check
+   ==================
+   Status: HEALTHY
+   Knowledge: 1284 chunks | 104 skills
+   Vector DB: Connected (22900 vectors)
+   ```
+
+</Steps>
+
+## First Commands
+
+Once connected, try these in your agent:
+
+### Search knowledge
+```
+Use the search_knowledge tool to find information about "React Server Components"
+```
+
+### List available skills
+```
+Use the list_skills tool with stack "python" to see Python-related skills
+```
+
+### Check system status
+```
+Use the hive_status tool to see knowledge base metrics
+```
+
+### Agent handshake (recommended first call)
+```
+Use the agent_handshake tool with your model name and project goal to get a personalized tool catalog
+```
+
+## Authentication (Optional)
+
+The free tier works without authentication (9 tools, 100 queries/month). For full access:
+
+```bash
+# Set your API key as environment variable
+export MIDOS_API_KEY="midos_sk_dev_your_key_here"
+```
+
+Or pass it in the MCP config:
+```json
+{
+  "mcpServers": {
+    "midos": {
+      "command": "midos-mcp",
+      "args": ["serve"],
+      "env": {
+        "MIDOS_API_KEY": "midos_sk_dev_your_key_here"
+      }
+    }
+  }
+}
+```
+
+See [Access Tiers](/tiers/) for details on what each tier unlocks.
+
+## Next Steps
+
+- [Try MidOS](/guides/try-it/) — test tools instantly via curl, no install needed
+- Browse the [Tool Catalog](/tools/overview/) to see all available tools
+- Read about [Access Tiers](/tiers/) and pricing
+- Understand the [Architecture](/architecture/)

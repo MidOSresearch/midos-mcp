@@ -1,0 +1,90 @@
+---
+title: MidOS — Curated Knowledge for AI Agents
+description: MCP Community Library with 57 tools, 1284 knowledge chunks, 104 skills, and 22900 vectors. Source-verified patterns and semantic search for any MCP-compatible client.
+template: splash
+hero:
+  tagline: "MCP Community Library — Source-verified knowledge, battle-tested skills, and semantic search. Plug into Claude Desktop, Cursor, or any MCP client in 30 seconds."
+  actions:
+    - text: Quick Start
+      link: /midos-web/quickstart/
+      icon: right-arrow
+    - text: Tool Catalog
+      link: /midos-web/tools/overview/
+      icon: external
+      variant: minimal
+    - text: GitHub
+      link: https://github.com/MidOSresearch/midos-mcp
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-value">57</div>
+    <div class="stat-label">MCP Tools</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">1,284</div>
+    <div class="stat-label">Knowledge Chunks</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">104</div>
+    <div class="stat-label">Skills</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">22,900</div>
+    <div class="stat-label">Vectors</div>
+  </div>
+</div>
+
+## Why MidOS?
+
+Context7 gives you raw docs. MidOS gives you **curated, validated knowledge** — every chunk passes through a 5-layer pipeline before reaching your agent.
+
+<CardGrid>
+  <Card title="Semantic Search" icon="magnifier">
+    Vector search powered by Gemini embeddings (3072-d). Find relevant knowledge by meaning, not just keywords. Hybrid mode combines keyword + semantic for best results.
+  </Card>
+  <Card title="Source-Verified Quality" icon="approve-check-circle">
+    5-layer knowledge pipeline: Staging → Chunks → Truth Patches → EUREKA → SOTA. Every piece of knowledge is validated, deduplicated, and scored.
+  </Card>
+  <Card title="Agent Handshake" icon="puzzle">
+    Call `agent_handshake` once and get a personalized tool catalog based on your model, context window, languages, and project goal.
+  </Card>
+  <Card title="104 Skills, 20+ Stacks" icon="open-book">
+    Pre-built skill documents for React 19, FastAPI, Django, NestJS, Go, Rust, Kubernetes, security patterns, and more — ready to inject into any agent context.
+  </Card>
+  <Card title="MCP Native" icon="rocket">
+    Works with Claude Desktop, Cursor, Cline, Windsurf, VS Code, Zed, OpenCode, and any MCP-compatible client. Stdio and HTTP transports.
+  </Card>
+  <Card title="Tiered Access" icon="setting">
+    Free tier with 9 tools and 100 queries/month. Dev tier unlocks full knowledge base, EUREKA discoveries, semantic search, and 25,000 queries/month.
+  </Card>
+</CardGrid>
+
+## Install in 30 Seconds
+
+```bash
+pip install midos-mcp
+```
+
+Then add to your MCP client config:
+
+```json
+{
+  "mcpServers": {
+    "midos": {
+      "command": "midos-mcp",
+      "args": ["serve"]
+    }
+  }
+}
+```
+
+That's it. Your agent now has access to 1,284 curated knowledge chunks and 57 tools.
+
+<div style="text-align: center; margin-top: 2rem;">
+  <a href="/midos-web/quickstart/" style="display: inline-block; padding: 0.75rem 2rem; background: var(--sl-color-accent); color: white; border-radius: 8px; text-decoration: none; font-weight: 600;">Full Quick Start Guide →</a>
+</div>

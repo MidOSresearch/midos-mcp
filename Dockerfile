@@ -1,29 +1,19 @@
-FROM python:3.12-slim
+FROM node:22-alpine AS web-builder
+WORKDIR /web
+COPY web/package.json ./
+RUN npm install
+COPY web/ ./
+RUN npm run build
 
-WORKDIR /app
+FROM nginx:alpine AS runner
+RUN apk add --no-cache curl
+COPY --from=web-builder /web/dist /usr/share/nginx/html
 
-# Install build dependencies for native extensions
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
+RUN printf 'server {\n    listen 80;\n    server_name _;\n    root /usr/share/nginx/html;\n    index index.html;\n    location / {\n        try_files $uri $uri/ $uri/index.html =404;\n    }\n}\n' > /etc/nginx/conf.d/default.conf
 
-# Copy dependency definition + README (pip needs it for metadata)
-COPY pyproject.toml README.md ./
+EXPOSE 80
 
-# Install Python dependencies
-RUN pip install --no-cache-dir .
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost/ || exit 1
 
-# Copy application code
-COPY modules/ modules/
-COPY hive_commons/ hive_commons/
-COPY .env.example .env
-
-# Copy knowledge content (stripped/gated by sync_public_repo.py)
-COPY knowledge/ knowledge/
-
-EXPOSE 8419
-
-HEALTHCHECK --interval=10s --timeout=5s --start-period=15s --retries=3 \
-    CMD python -c "import socket; s = socket.create_connection(('localhost', 8419), timeout=3); s.close()" || exit 1
-
-CMD ["python", "-u", "-m", "modules.mcp_server.midos_mcp", "--http", "--host", "0.0.0.0", "--port", "8419"]
+CMD ["nginx", "-g", "daemon off;"]

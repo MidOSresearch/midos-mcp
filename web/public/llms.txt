@@ -1,0 +1,65 @@
+# MidOS
+
+> MidOS is an MCP Community Library providing curated knowledge, skills, and tools for AI agents. 1284 knowledge chunks, 104 skills across 15+ stacks, 100+ EUREKA-validated patterns, and 55 MCP tools organized in tiered access (community, dev, ops, admin). Built for programmers, researchers, and AI developers who want reliable, structured knowledge served via the Model Context Protocol.
+
+- Site: https://midos.dev
+- Repository: https://github.com/MidOSresearch/MidOS
+- License: MIT
+- MCP Server: `python -m modules.mcp_server.midos_mcp` (stdio) or HTTP on port 8420
+
+## Getting Started
+
+- [Quick Start](https://midos.dev/quickstart): Install and connect to MidOS in under 5 minutes
+- [Architecture](https://midos.dev/architecture): System design — knowledge pipeline, vector store, MCP server
+- [Access Tiers](https://midos.dev/tiers): Community (free), Dev, Ops, Admin — what each tier unlocks
+- [Agent Onboarding](https://midos.dev/guides/agent-onboarding): Step-by-step guide for AI agents connecting for the first time
+
+## Tool Catalog
+
+- [Tool Overview](https://midos.dev/tools/overview): Complete catalog of 55 MCP tools by category
+- [Community Tools](https://midos.dev/tools/free): 22 tools available without authentication — search, skills, feedback, health
+- [Dev Tools](https://midos.dev/tools/dev): 9 tools for developers — EUREKA, truth patches, semantic search, code chunking
+- [Admin Tools](https://midos.dev/tools/admin): 25 tools for server operators — memory, planning, security, orchestration
+- [Marketplace](https://midos.dev/tools/marketplace): Skill pack installation and management
+- [QA & Community](https://midos.dev/tools/qa): Quality gates, feedback loops, QA reporting
+
+## Guides
+
+- [Semantic Search](https://midos.dev/guides/semantic-search): How to use vector search across 22900 embeddings
+- [Session Management](https://midos.dev/guides/sessions): Save and restore agent progress across sessions
+
+## MCP Connection
+
+Connect via stdio (recommended):
+```json
+{
+  "mcpServers": {
+    "midos": {
+      "command": "python",
+      "args": ["-m", "modules.mcp_server.midos_mcp"]
+    }
+  }
+}
+```
+
+Or via HTTP:
+```
+POST http://localhost:8420/mcp-protocol/mcp
+```
+
+## Key Tools for Agents
+
+- `agent_handshake` — Personalized onboarding: detects your model, client, and stack
+- `search_knowledge` — Search 1284 knowledge chunks by keyword
+- `hybrid_search` — Grep-first + semantic fallback for best results
+- `get_skill` — Fetch complete skill documents (React, Python, Go, Rust, etc.)
+- `list_skills` — Browse 104 skills across 15+ technology stacks
+- `semantic_search` — Vector search via LanceDB + Gemini embeddings (3072-d)
+- `get_eureka` — Access breakthrough documents with measured ROI
+- `get_truth` — Verified fixes and corrections (truth patches)
+- `submit_feedback` — Rate any knowledge item to improve quality
+
+## Optional
+
+- [MCP Discovery](https://midos.dev/.well-known/mcp.json): Machine-readable MCP server metadata
+- [Repository](https://github.com/MidOSresearch/MidOS): Full source code and documentation
